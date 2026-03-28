@@ -42,3 +42,25 @@ public class HashTable<K, V> {
         }
         return null;
     }
+    public void remove(K chave) {
+            if (chave == null) {
+                throw new IllegalArgumentException("Chave não pode ser nula");
+            }
+            int indice = calcularHash(chave);
+            EntradaHash<K, V> atual = tabela[indice];
+            EntradaHash<K, V> anterior = null;
+    
+            while (atual != null) {
+                if (atual.getChave().equals(chave)) {
+                    if (anterior == null) {
+                        tabela[indice] = atual.getProximo();
+                    } else {
+                        anterior.setProximo(atual.getProximo());
+                    }
+                    return;
+                }
+                anterior = atual;
+                atual = atual.getProximo();
+            }
+        }
+    }
